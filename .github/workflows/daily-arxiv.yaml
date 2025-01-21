@@ -13,6 +13,7 @@ jobs:
 
     env:
       OPENAI_BASE_URL: ${{ vars.OPENAI_BASE_URL }}
+      OPENAI_MINI_MODEL: ${{ vars.OPENAI_MINI_MODEL }}
       OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
       SMTP_SERVER: ${{ vars.SMTP_SERVER }}
       SMTP_PORT: ${{ vars.SMTP_PORT }}
