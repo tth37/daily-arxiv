@@ -3,3 +3,5 @@ arxiv
 python-dotenv
 jinja2
 markdown
+requests
+PyPDF2
