@@ -105,7 +105,9 @@ def generate_report(papers, template):
     report_md = completion.replace("```markdown", "").replace("```md", "").replace("```", "")
     report_html = markdown.markdown(report_md)
     return (
-        "<!DOCTYPE html><html><head><meta charset='utf-8'></head><body>"
+        "<!DOCTYPE html><html><head><meta charset='utf-8'>"
+        + '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.4.5/spectre.min.css"/>'
+        + "</head><body>"
         + report_html
         + "</body></html>"
     )
@@ -205,7 +207,8 @@ def main():
             if SMTP_DRYRUN:
                 print("\tDry run enabled, skipping email sending")
                 continue
-            send_email(SUBSCRIBERS, f"📚 {name} selected papers for {today}", report)
+            title = f"📚 Check out daily arXiv papers on {name}"
+            send_email(SUBSCRIBERS, title, report)
             print(f"\tEmail sent to {SUBSCRIBERS}")
 
         except Exception as e:
