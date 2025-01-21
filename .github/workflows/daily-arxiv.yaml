@@ -10,6 +10,18 @@ on:
 jobs:
   daily-arxiv:
     runs-on: ubuntu-latest
+
+    env:
+      OPENAI_BASE_URL: ${{ vars.OPENAI_BASE_URL }}
+      OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+      SMTP_SERVER: ${{ vars.SMTP_SERVER }}
+      SMTP_PORT: ${{ vars.SMTP_PORT }}
+      SMTP_USERNAME: ${{ vars.SMTP_USERNAME }}
+      SUBSCRIBERS: ${{ vars.SUBSCRIBERS }}
+      TOPICS: ${{ vars.TOPICS }}
+      VERBOSE: ${{ vars.VERBOSE }}
+      OPENAI_DRYRUN: ${{ vars.OPENAI_DRYRUN }}
+      SMTP_DRYRUN: ${{ vars.SMTP_DRYRUN }}
     
     steps:
       - name: Check out repository
@@ -28,4 +40,5 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+
         run: python index.py
