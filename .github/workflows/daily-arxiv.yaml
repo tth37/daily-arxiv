@@ -5,6 +5,7 @@ on:
     # This cron expression is at UTC time. 
     # 9 AM UTC+8 is 1 AM UTC, so we use: 0 1 * * *
     - cron: "0 1 * * *"
+  workflow_dispatch:
 
 jobs:
   daily-arxiv:
