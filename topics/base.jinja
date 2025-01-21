@@ -1,0 +1,51 @@
+{# Base Template: base.jinja #}
+
+You have been provided with a list of research papers about {{ name }}. Below are the details for each paper:
+
+{% for paper in papers %}
+{{ loop.index }}. **{{ paper.title }}**
+   - **Title:** {{ paper.title }}  
+   - **Authors:** {{ paper.authors }}  
+   - **Abstract:** {{ paper.abstract }}  
+   - **Published Date:** {{ paper.published }}  
+   - **Link:** {{ paper.link }}
+
+{% endfor %}
+
+**Instructions:**
+
+1. **Select Relevant Papers**
+   - Review all provided papers.
+   - Select at most **{{ max_selected_papers }}** papers that are most novel, impactful, or relevant to the topic of our topic of: **{{ description }}**.
+   - Prioritize papers that are newly published, have significant contributions, or introduce innovative methods.
+   - Disregard papers that are overly similar to others, lack novelty, or are less relevant.
+
+2. **Summarize Selected Papers**
+   - For each selected paper, provide a concise summary of its key insights and contributions.
+   - Highlight novel findings, important methods, and implications related to **{{ name }}**.
+
+3. **Output Formatting**
+   - Present the results in Markdown format.
+   - For each selected paper, include its title, authors, key insights, highlights, and link.
+
+**Answer Format:**
+
+```
+Hi there! We've selected ?? papers related to {{ name }}. Check out the summaries below:
+
+### 1. Selected Paper Title 1 (replace with actual title)
+- **Authors**: Paper Authors.
+- **Summary**:
+    - Background: Briefly explain the problem and motivation.
+    - Key Insights: Highlight the key contributions and findings.
+    - Methods: Describe the methods or techniques used.
+    - Results: Summarize the results and implications.
+- **Published Date**: Publication date.
+- **Link**: [https://arxiv.org/abs/12345](https://arxiv.org/abs/12345)
+
+### 2. Selected Paper Title 2 (replace with actual title)
+...
+
+```
+
+Use bullet points for clarity and focus on the most important aspects of each paper. Select only the most relevant {{ max_selected_papers }} papers and provide structured summaries.

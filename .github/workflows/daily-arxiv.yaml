@@ -1,0 +1,43 @@
+name: "Daily arXiv Job"
+
+on:
+  schedule:
+    # This cron expression is at UTC time. 
+    # 9 AM UTC+8 is 1 AM UTC, so we use: 0 1 * * *
+    - cron: "0 1 * * *"
+
+jobs:
+  daily-arxiv:
+    runs-on: ubuntu-latest
+    
+    # If you have non-sensitive ENV variables, you can define them here in `env`.
+    # For sensitive ones, use GitHub Secrets and reference them as shown below.
+    env:
+      OPENAI_BASE_URL: "https://dashscope.aliyuncs.com/compatible-mode/v1"
+      OPENAI_MODEL: "qwen-plus-latest"
+      SMTP_SERVER: "smtp.gmail.com"
+      SMTP_PORT: "465"
+      SMTP_USERNAME: "xgpsthd0902@gmail.com"
+      SUBSCRIBERS: "xgpsthd0902@outlook.com"
+      TOPICS: "llm-serving"
+      VERBOSE: "false"
+      DRYRUN: "false"
+    
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"  # or whichever Python version you need
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run the Python script
+        # Here we override or add environment variables that are sensitive by referencing secrets.
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+        run: python index.py

@@ -1,0 +1,9 @@
+{% extends "base.jinja" %}
+
+{% set query = '((llm OR "large language model") AND (serving OR inference OR deployment OR "system optimization"))' %}
+{% set description = 'Research on LLM serving, inference, and deployment systems focuses on optimizing the performance, scalability, and efficiency of large-scale language models for real-world applications, addressing challenges in latency, resource utilization, scalability, and integration.' %}
+{% set name = 'LLM Serving' %}
+{% set max_papers = 25 %}
+{% set max_selected_papers = 10 %}
+
+{{ super() }}
