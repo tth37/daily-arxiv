@@ -105,9 +105,7 @@ def generate_report(papers, template):
     report_md = completion.replace("```markdown", "").replace("```md", "").replace("```", "")
     report_html = markdown.markdown(report_md)
     return (
-        "<!DOCTYPE html><html><head><meta charset='utf-8'>"
-        + '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.4.5/spectre.min.css"/>'
-        + "</head><body>"
+        "<!DOCTYPE html><html><head><meta charset='utf-8'></head><body>"
         + report_html
         + "</body></html>"
     )
