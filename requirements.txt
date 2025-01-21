@@ -1,2 +1,5 @@
-Jinja2
+openai
 arxiv
+python-dotenv
+jinja2
+markdown
