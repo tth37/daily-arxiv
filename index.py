@@ -18,6 +18,7 @@ load_dotenv()  # Load .env file if you are using one
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL")
 OPENAI_MODEL = os.getenv("OPENAI_MODEL")
+OPENAI_MINI_MODEL = os.getenv("OPENAI_MINI_MODEL", OPENAI_MODEL)
 
 SMTP_SERVER = os.getenv("SMTP_SERVER")
 SMTP_PORT = os.getenv("SMTP_PORT")
@@ -128,7 +129,7 @@ def extract_affiliations(first_page_text, title):
         "\n\n"
         f"```\n{first_page_text}\n```"
     )
-    completion = make_completion(prompt)
+    completion = make_completion(prompt, model=OPENAI_MINI_MODEL)
     
     # Extract the AI-generated answer
     affiliations = completion.strip().replace("'", "").replace('"', "").split(", ")
