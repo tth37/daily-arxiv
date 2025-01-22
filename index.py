@@ -63,7 +63,7 @@ def fetch_papers(query, max_results=100):
         print(f"\t\tFetching paper: {result.title}")
         paper_pdf_url = result.pdf_url
         reader = PdfReader(io.BytesIO(requests.get(paper_pdf_url).content))
-        first_page_text = reader.pages[0].extract_text().split("Abstract")[0]
+        first_page_text = reader.pages[0].extract_text()
         affiliations = extract_affiliations(first_page_text, result.title)
         paper_info = {
             "title": result.title,
