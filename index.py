@@ -117,22 +117,18 @@ def extract_affiliations(first_page_text, title):
     Using mini model to reduce cost.
     """
     prompt = (
-        f"Below is the first page of a paper titled '{title}'."
+        f"Below is the first page of a scholar paper titled '{title}'."
         " Please extract the affiliations of all authors from the extracted text."
-        " Your output should be a list of affiliations separated by ','."
-        " Note that there should **not** be commas within the affiliations,"
-        " please shorten the affiliations, only to keep the school/company name."
-        " For example 'University of California, Berkeley' should be shortened to 'UC Berkeley',"
-        " 'School of Economics and Management, Guizhou Normal University, Guiyang, China' should be shortened to 'Guizhou Normal University'."
-        " 'Zhipu AI' should remain as 'Zhipu AI'."
-        " Example output: 'UC Berkeley, Zhipu AI, Guizhou Normal University'."
+        " Your output should be a list of affiliations in single-line, seperate multiple affiliations with '; '."
+        " For repeated affiliations just keep one."
+        " If you are unable to extract any affiliations, please write single-line output: None."
         "\n\n"
         f"```\n{first_page_text}\n```"
     )
     completion = make_completion(prompt, model=OPENAI_MINI_MODEL)
     
     # Extract the AI-generated answer
-    affiliations = completion.strip().replace("'", "").replace('"', "").split(", ")
+    affiliations = completion.strip().replace("'", "").replace('"', "")
     return affiliations
 
 def send_email(recipients, subject, report):
@@ -163,7 +159,7 @@ def dump_papers(topic, papers, template):
         for paper in papers:
             f.write(f"- {paper['title']} ({paper['published']})\n")
             f.write(f"  Authors: {', '.join(paper['authors'])}\n")
-            f.write(f"  Affiliations: {', '.join(paper['affiliations'])}\n")
+            f.write(f"  Affiliations: {paper['affiliations']}\n")
             f.write(f"  Link: {paper['link']}\n")
             f.write("\n")
         f.write("\n")
